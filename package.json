@@ -1,0 +1,14 @@
+{
+  "name": "com.codysource.servercookie",
+  "version": "1.0.0",
+  "displayName": "Server Cookie",
+  "description": "This package enables the ability to capture a server cookie on webserver with php installed.",
+  "unity": "2020.3",
+  "unityRelease": "15f2",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
+  },
+  "author": {
+    "name": "Cody Source"
+  }
+}
