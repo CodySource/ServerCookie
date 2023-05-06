@@ -66,7 +66,7 @@ namespace CodySource
                 if (editorOverride != "")
                 {
                     onRequestComplete?.Invoke(editorOverride);
-                    yield return null;
+                    yield break;
                 }
 #endif
                 WWWForm form = new WWWForm();
