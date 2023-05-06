@@ -33,8 +33,11 @@ namespace CodySource
             }
 
             public string defaultURL = "";
+#if UNITY_EDITOR
+            public string editorOverride = "";
+#endif
             public UnityEvent<string> onRequestFailed = new UnityEvent<string>();
-            public UnityEvent<Response> onRequestComplete = new UnityEvent<Response>();
+            public UnityEvent<string> onRequestComplete = new UnityEvent<string>();
 
             #endregion
 
@@ -59,6 +62,13 @@ namespace CodySource
             /// </summary>
             internal IEnumerator _Request(string pURL)
             {
+#if UNITY_EDITOR
+                if (editorOverride != "")
+                {
+                    onRequestComplete?.Invoke(editorOverride);
+                    yield return null;
+                }
+#endif
                 WWWForm form = new WWWForm();
                 using (UnityWebRequest www = UnityWebRequest.Post($"{pURL}", form))
                 {
@@ -66,7 +76,12 @@ namespace CodySource
                     try
                     {
                         if (www.result != UnityWebRequest.Result.Success) onRequestFailed?.Invoke(www.error);
-                        else onRequestComplete?.Invoke(JsonConvert.DeserializeObject<Response>(www.downloadHandler.text));
+                        else
+                        {
+                            Response r = JsonConvert.DeserializeObject<Response>(www.downloadHandler.text);
+                            if (r.error != "") onRequestFailed?.Invoke(r.error);
+                            else onRequestComplete?.Invoke(r.value);
+                        }
                     }
                     catch (System.Exception e)
                     {
