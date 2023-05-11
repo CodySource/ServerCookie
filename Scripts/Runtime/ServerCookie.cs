@@ -79,8 +79,8 @@ namespace CodySource
                         else
                         {
                             CookieResponse r = JsonConvert.DeserializeObject<CookieResponse>(www.downloadHandler.text);
-                            if (r.error != null || r.error != "") onRequestFailed?.Invoke(r.error);
-                            else onRequestComplete?.Invoke(r.value);
+                            if (r.value != null && r.value != "") onRequestComplete?.Invoke(r.value);
+                            else onRequestFailed?.Invoke(r.error);
                         }
                     }
                     catch (System.Exception e)
