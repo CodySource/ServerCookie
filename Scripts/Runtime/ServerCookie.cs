@@ -78,7 +78,7 @@ namespace CodySource
                         if (www.result != UnityWebRequest.Result.Success) onRequestFailed?.Invoke(www.error);
                         else
                         {
-                            Response r = JsonConvert.DeserializeObject<Response>(www.downloadHandler.text);
+                            CookieResponse r = JsonConvert.DeserializeObject<CookieResponse>(www.downloadHandler.text);
                             if (r.error != "") onRequestFailed?.Invoke(r.error);
                             else onRequestComplete?.Invoke(r.value);
                         }
@@ -95,7 +95,7 @@ namespace CodySource
             #region PUBLIC STRUCTS
 
             [System.Serializable]
-            public struct Response
+            public struct CookieResponse
             {
                 public string error;
                 public string value;
