@@ -1,6 +1,6 @@
 {
   "name": "com.codysource.servercookie",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "Server Cookie",
   "description": "This package enables the ability to capture a server cookie on webserver with php installed.",
   "unity": "2020.3",
